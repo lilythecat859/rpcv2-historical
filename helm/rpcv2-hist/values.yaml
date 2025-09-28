@@ -1,0 +1,18 @@
+replicaCount: 2
+image:
+  repository: ghcr.io/YOUR_GITHUB_USERNAME/rpcv2-hist
+  tag: latest
+  pullPolicy: Always
+service:
+  type: ClusterIP
+  port: 8899
+resources:
+  limits:
+    cpu: 1000m
+    memory: 2Gi
+  requests:
+    cpu: 500m
+    memory: 1Gi
+clickhouse:
+  dsn: "tcp://clickhouse:9000/rpcv2_hist"
+jwtKey: "YOUR_BASE64_ED25519_KEY"
