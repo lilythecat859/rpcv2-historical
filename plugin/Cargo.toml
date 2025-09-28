@@ -1,0 +1,20 @@
+[package]
+name = "rpcv2-geyser"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+solana-geyser-plugin-interface = "=1.18.0"
+solana-sdk = "=1.18.0"
+clickhouse = { version = "0.11", default-features = false, features = ["rustls"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+anyhow = "1.0"
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
+
+[profile.release]
+lto = true
+codegen-units = 1
