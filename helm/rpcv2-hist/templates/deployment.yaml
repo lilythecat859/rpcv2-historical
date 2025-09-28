@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rpcv2-hist
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: rpcv2-hist
+  template:
+    metadata:
+      labels:
+        app: rpcv2-hist
+    spec:
+      containers:
+        - name: rpcv2-hist
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 8899
+          env:
+            - name: DB
+              value: {{ .Values.clickhouse.dsn }}
+            - name: JWT_KEY
+              value: {{ .Values.jwtKey }}
+          resources: {{- toYaml .Values.resources | nindent 12 }}
+          
