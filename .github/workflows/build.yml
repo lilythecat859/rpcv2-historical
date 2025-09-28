@@ -1,0 +1,31 @@
+name: build
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+      - run: go build -o rpcv2-hist ./cmd/rpcv2-hist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rpcv2-hist
+          path: rpcv2-hist
+
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo build --release --manifest-path=plugin/Cargo.toml
+      - uses: actions/upload-artifact@v4
+        with:
+          name: librpcv2_geyser.so
+          path: plugin/target/release/librpcv2_geyser.so
+          
