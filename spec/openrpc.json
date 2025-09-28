@@ -1,0 +1,91 @@
+{
+  "openrpc": "1.2.6",
+  "info": {
+    "title": "RPCv2 Historical",
+    "version": "0.1.0"
+  },
+  "methods": [
+    {
+      "name": "getBlock",
+      "params": [
+        {
+          "name": "slot",
+          "schema": { "type": "integer" }
+        }
+      ],
+      "result": {
+        "name": "block",
+        "schema": { "$ref": "#/components/schemas/Block" }
+      }
+    },
+    {
+      "name": "getTransaction",
+      "params": [
+        {
+          "name": "signature",
+          "schema": { "type": "string" }
+        }
+      ],
+      "result": {
+        "name": "tx",
+        "schema": { "$ref": "#/components/schemas/Transaction" }
+      }
+    },
+    {
+      "name": "getSignaturesForAddress",
+      "params": [
+        {
+          "name": "address",
+          "schema": { "type": "string" }
+        },
+        {
+          "name": "limit",
+          "schema": { "type": "integer", "default": 1000, "maximum": 10000 }
+        }
+      ],
+      "result": {
+        "name": "sigs",
+        "schema": {
+          "type": "array",
+          "items": { "$ref": "#/components/schemas/SigForAddr" }
+        }
+      }
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Block": {
+        "type": "object",
+        "properties": {
+          "slot": { "type": "integer" },
+          "blockhash": { "type": "string" },
+          "parent_slot": { "type": "integer" },
+          "block_time": { "type": "integer" },
+          "transaction_count": { "type": "integer" }
+        }
+      },
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "slot": { "type": "integer" },
+          "transaction_hash": { "type": "string" },
+          "index": { "type": "integer" },
+          "meta": { "type": "string", "contentEncoding": "base64" },
+          "message": { "type": "string", "contentEncoding": "base64" },
+          "block_time": { "type": "integer" }
+        }
+      },
+      "SigForAddr": {
+        "type": "object",
+        "properties": {
+          "address": { "type": "string" },
+          "signature": { "type": "string" },
+          "slot": { "type": "integer" },
+          "memo": { "type": "string", "contentEncoding": "base64" },
+          "error": { "type": ["string", "null"] },
+          "block_time": { "type": "integer" }
+        }
+      }
+    }
+  }
+}
