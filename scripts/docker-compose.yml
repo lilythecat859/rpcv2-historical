@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:23.8
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    volumes:
+      - ch:/var/lib/clickhouse
+    environment:
+      CLICKHOUSE_DB: rpcv2_hist
+  rpcv2:
+    build: ../
+    ports:
+      - "8899:8899"
+    environment:
+      DB: clickhouse://default:@clickhouse:9000/rpcv2_hist
+      JWT_KEY: ${JWT_KEY}
+    depends_on:
+      - clickhouse
+volumes:
+  ch:
+  
