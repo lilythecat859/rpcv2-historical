@@ -1,5 +1,6 @@
 module github.com/rpcv2-historical
 
+
 go 1.22
 
 require (
