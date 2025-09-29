@@ -2,7 +2,11 @@
 # RPCv2-Historical Geyser Plugin
 
 ## Purpose
-Streams every Solana transaction signature (and its fee-payer address) into ClickHouse in real-time so the RPCv2-Historical service can answer `getSignaturesForAddress` queries in **<10 ms** instead of **>100 ms**.
+Streams every Solana transaction signature 
+(and its fee-payer address) into ClickHouse 
+in real-time so the RPCv2-Historical service 
+can answer `getSignaturesForAddress` queries 
+in **<10 ms** instead of **>100 ms**.
 
 ## Build (Linux / macOS / WSL)
 ```bash
