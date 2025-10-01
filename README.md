@@ -64,4 +64,8 @@ helm install rpcv2-hist helm/rpcv2-hist \
 
 ## License
 AGPL-3.0 – commercial hosting allowed, modifications must be published.
-```
+
+---
+
+"The fractal nature of reality is that you can go forever in, and you get the same amount of detail forever out.”
+— Terence McKenna, "Evolving Times" lecture, Boulder, Colorado, October 1994
